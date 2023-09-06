@@ -12,3 +12,10 @@
  
  Database:
  -MySql,
+
+# Tool
+- Intellij Idea
+- VS code
+- MYSQL WORKBENCH
+- Notepad
+- Chrome
