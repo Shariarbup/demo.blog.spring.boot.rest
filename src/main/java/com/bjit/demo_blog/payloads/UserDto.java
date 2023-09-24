@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.bridge.IMessage;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
