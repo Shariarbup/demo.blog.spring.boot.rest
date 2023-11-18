@@ -4,6 +4,7 @@ import com.bjit.demo_blog.entity.Comment;
 import com.bjit.demo_blog.payloads.CommentDto;
 import com.bjit.demo_blog.services.CommentService;
 import com.bjit.demo_blog.utils.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
+@SecurityRequirement(name="Bearer Authentication")
 public class CommentController {
     @Autowired
     private CommentService commentService;

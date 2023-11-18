@@ -3,6 +3,7 @@ package com.bjit.demo_blog.controllers;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@SecurityRequirement(name="Bearer Authentication")
 public class UserController {
     @Autowired
     private UserService userService;

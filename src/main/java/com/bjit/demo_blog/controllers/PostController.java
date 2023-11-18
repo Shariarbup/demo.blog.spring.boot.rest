@@ -7,6 +7,7 @@ import com.bjit.demo_blog.services.FileService;
 import com.bjit.demo_blog.services.PostService;
 import com.bjit.demo_blog.utils.ApiResponse;
 import com.bjit.demo_blog.utils.PostResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@SecurityRequirement(name="Bearer Authentication")
 public class PostController {
     @Autowired
     private PostService postService;

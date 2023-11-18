@@ -1,5 +1,7 @@
 package com.bjit.demo_blog.config;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -11,6 +13,12 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
+@SecurityScheme(
+        name = "Bearer Authentication",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 public class SwaggerConfig {
 
     public static final String AUTHORIZATION_HEADER="Authorization";
@@ -24,6 +32,7 @@ public class SwaggerConfig {
                     .version("1.0")
                     .contact(new Contact().name("Md. Al Shariar").email("itmasjoy@gmail.com")));
     }
+
 
 //    private ApiKey apiKeys(){
 //        return new ApiKey("JWT",AUTHORIZATION_HEADER,"header");
