@@ -37,3 +37,7 @@ http://localhost:9090/swagger-ui/index.html
 5. Create two variable name "MAVEN_HOME", "M2_HOME" and for value past C:\Program Files\apache-maven-3.9.5
 6. Edit the path variable and add two variable there "MAVEN_HOME\bin" and "M2_HOME\bin"
 7. Without this "M2_HOME\bin" windows may be not recognize the maven
+
+# Twilio.com(for otp)
+1. Used email: itmasjoy@gmail.com
+2. Used mobile number: 01968385155

@@ -3,6 +3,7 @@ package com.bjit.demo_blog;
 import com.bjit.demo_blog.config.AppConstants;
 import com.bjit.demo_blog.entity.Role;
 import com.bjit.demo_blog.repositories.RoleRepository;
+import com.bjit.demo_blog.services.EmailSenderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +22,8 @@ public class Application implements CommandLineRunner {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private EmailSenderService emailSenderService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -34,6 +37,7 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println(this.passwordEncoder.encode("xyz"));
+//		emailSenderService.sendSimpleEmail("jannatulferdaus0664@gmail.com","Hi Buri, How are you!","From your dear");
 		try{
 			Role role = new Role();
 			role.setId(AppConstants.ROLE_ADMIN);
