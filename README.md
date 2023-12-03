@@ -48,3 +48,28 @@ http://localhost:9090/swagger-ui/index.html
 # Twilio.com(for otp)
 1. Used email: itmasjoy@gmail.com
 2. Used mobile number: 01968385155
+
+
+
+# Tutorial
+
+# How to create github app
+
+- Owned by: @Shariarbup
+- App ID: 669676
+- Client ID: Iv1.93bd50a5ac2e228d
+- public link: https://github.com/apps/shariar-demo-coding
+- client secret: a894a42a88b1cb08b5af5672779be74570167d75
+
+- Go to Setting -> then go to developer setting(see in the lower portion) -> create github app
+- provide home url and call back url - http://localhost:8080 (in my case)
+- uncheck which is not necessary in my case(webhook)
+
+# How to create google app
+
+- Client ID: 254969945458-fbmtbh649piqc128rps1fv7dfpksqaei.apps.googleusercontent.com
+- Client Secret: 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
+
+- Go- https://console.cloud.google.com/
+- Create an app
+- Then got Rest API and Services -> Create credentials -> Oauth client id -> Applicatio Type(desktop App)
