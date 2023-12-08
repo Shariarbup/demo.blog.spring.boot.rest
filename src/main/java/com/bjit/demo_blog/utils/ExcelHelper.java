@@ -6,10 +6,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ExcelHelper {
@@ -62,5 +67,34 @@ public class ExcelHelper {
             out.close();
         }
         return null;
+    }
+    
+    //excel to list of user
+    List<User> convertExcelToListOfUser(InputStream inputStream) {
+        List<User> list = new ArrayList<>();
+        try{
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+            XSSFSheet sheet = workbook.getSheet("data");// excel sheet er name jeita thakbe...ekhane oita boshaite hobe
+            int rowNUmber = 0;
+            Iterator<Row> iterator = sheet.iterator();
+            while(iterator.hasNext()) {
+                Row row = iterator.next();
+                if(rowNUmber == 0) {
+                    rowNUmber++;
+                    continue;
+                }
+                User user = new User();
+                Iterator<Cell> cells = row.iterator();
+                int cid = 0;
+                while(cells.hasNext()) {
+                    Cell cell = cells.next();
+                    switch (cid)
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
