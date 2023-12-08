@@ -53,6 +53,11 @@ http://localhost:9090/swagger-ui/index.html
 
 # Tutorial
 
+- Alt + Entr press korle local variable assign hoi
+- ctrl + F full project e kono text search korar jonne use
+- ctrl + N full project e file search korar jonne use hoi
+- ctrl + G - ekta file jekono line e jaoar jonne use hoi
+
 # How to create github app
 
 - Owned by: @Shariarbup
