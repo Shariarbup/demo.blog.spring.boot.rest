@@ -3,6 +3,7 @@ package com.bjit.demo_blog.controllers;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.ApiResponse;
+import com.bjit.demo_blog.utils.ExcelHelper;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -51,6 +54,15 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId){
         return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
+    @PostMapping("/users/upload")
+    public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file) {
+        if(ExcelHelper.checkExcelFormat(file)) {
+            this.userService.saveUserFromImportExcel(file);
+            return ResponseEntity.ok(Map.of("message", "File is uploaded and data is save successfully"))
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please upload excel file");
     }
 
 }

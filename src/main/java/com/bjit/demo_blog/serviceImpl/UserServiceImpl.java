@@ -8,11 +8,14 @@ import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.repositories.RoleRepository;
 import com.bjit.demo_blog.repositories.UserRepository;
 import com.bjit.demo_blog.services.UserService;
+import com.bjit.demo_blog.utils.ExcelHelper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,6 +92,16 @@ public class UserServiceImpl implements UserService {
 //        user.setPassword(userDto.getPassword());
 //        user.setAbout(userDto.getAbout());
         return user;
+    }
+
+    @Override
+    public void saveUserFromImportExcel(MultipartFile file) {
+        try {
+            List<User> users = ExcelHelper.convertExcelToListOfUser((InputStream) file.getInputStream());
+            this.userRepository.saveAll(users);
+        } catch (Exception e) {
+
+        }
     }
 
     private UserDto userToDto(User user){

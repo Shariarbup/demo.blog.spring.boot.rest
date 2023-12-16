@@ -1,5 +1,6 @@
 package com.bjit.demo_blog.utils;
 
+import com.bjit.demo_blog.entity.User;
 import com.bjit.demo_blog.payloads.UserDto;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -68,9 +70,20 @@ public class ExcelHelper {
         }
         return null;
     }
+
+
+    //check that file is of excel type or not
+    public static boolean checkExcelFormat(MultipartFile file) {
+        String contentType = file.getContentType();
+        if(contentType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     //excel to list of user
-    List<User> convertExcelToListOfUser(InputStream inputStream) {
+   public static List<User> convertExcelToListOfUser(InputStream inputStream) {
         List<User> list = new ArrayList<>();
         try{
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
@@ -88,7 +101,23 @@ public class ExcelHelper {
                 int cid = 0;
                 while(cells.hasNext()) {
                     Cell cell = cells.next();
-                    switch (cid)
+                    switch (cid) {
+                        case 0:
+                            user.setId((long) cell.getNumericCellValue());
+                            break;
+                        case 1:
+                            user.setAbout((String) cell.getStringCellValue());
+                            break;
+                        case 2:
+                            user.setEmail((String) cell.getStringCellValue());
+                            break;
+                        case 3:
+                            user.setName((String) cell.getStringCellValue());
+                            break;
+                        default:
+                            break;
+                    }
+                    cid++;
                 }
             }
 
