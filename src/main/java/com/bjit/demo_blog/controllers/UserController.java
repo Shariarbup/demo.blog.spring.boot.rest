@@ -60,7 +60,7 @@ public class UserController {
     public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file) {
         if(ExcelHelper.checkExcelFormat(file)) {
             this.userService.saveUserFromImportExcel(file);
-            return ResponseEntity.ok(Map.of("message", "File is uploaded and data is save successfully"))
+            return ResponseEntity.ok(Map.of("message", "File is uploaded and data is save successfully"));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please upload excel file");
     }
