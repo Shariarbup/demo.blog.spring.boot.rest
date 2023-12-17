@@ -1,6 +1,8 @@
 package com.bjit.demo_blog.services;
 
+import com.bjit.demo_blog.entity.User;
 import com.bjit.demo_blog.payloads.UserDto;
+import com.bjit.demo_blog.utils.SearchRequest;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,4 +19,8 @@ public interface UserService {
     void saveUserFromImportExcel(MultipartFile file);
 
     String exportUserListPdf(String reportFormat) throws FileNotFoundException, JRException;
+
+    List<User> findAllBySimpleQuery(Long id, String name, String email);
+
+    List<User> findAllByAdvancedQuery(SearchRequest searchRequest);
 }

@@ -1,9 +1,11 @@
 package com.bjit.demo_blog.controllers;
 
+import com.bjit.demo_blog.entity.User;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.ApiResponse;
 import com.bjit.demo_blog.utils.ExcelHelper;
+import com.bjit.demo_blog.utils.SearchRequest;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,13 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId){
         return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
+    @GetMapping("/users/advancedQeuery")
+    public ResponseEntity<List<User>> getUserByAdvancedQuery(
+            SearchRequest searchRequest
+    ){
+        return ResponseEntity.ok(userService.findAllByAdvancedQuery(searchRequest));
     }
 
     @PostMapping(value = "/users/upload", consumes = {"multipart/form-data"})

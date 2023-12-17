@@ -9,6 +9,13 @@ import com.bjit.demo_blog.repositories.RoleRepository;
 import com.bjit.demo_blog.repositories.UserRepository;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.ExcelHelper;
+import com.bjit.demo_blog.utils.SearchRequest;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.modelmapper.ModelMapper;
@@ -21,10 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +44,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Override
     public UserDto registerNewUser(UserDto userDto) {
@@ -129,6 +136,71 @@ public class UserServiceImpl implements UserService {
         }
         return "Report generated successfully to this path : "+ path;
     }
+
+    @Override
+    public List<User> findAllBySimpleQuery(Long id, String name, String email ) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+
+        //prepare WHERE clause -> means prepare predicate
+
+        Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+
+        Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
+
+        Predicate emailPredicate = criteriaBuilder.like(root.get("email"), "%" + email + "%");
+
+        Predicate orPredicate = criteriaBuilder.or(idPredicate, namePredicate, emailPredicate);
+
+        Predicate andPredicate = criteriaBuilder.and(idPredicate, namePredicate, emailPredicate);
+
+        //output
+        userCriteriaQuery.where(andPredicate);
+
+        TypedQuery<User> query = entityManager.createQuery(userCriteriaQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<User> findAllByAdvancedQuery(SearchRequest searchRequest) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+        List<Predicate> predicates = new ArrayList<>();
+
+        //prepare WHERE clause -> means prepare predicate
+        if (searchRequest.getId() != null) {
+            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), searchRequest.getId());
+            predicates.add(idPredicate);
+        }
+
+        if (searchRequest.getName() != null) {
+            Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%" + searchRequest.getName() + "%");
+            predicates.add(namePredicate);
+        }
+
+        if (searchRequest.getEmail() != null) {
+            Predicate emailPredicate = criteriaBuilder.equal(root.get("email"), searchRequest.getEmail());
+            predicates.add(emailPredicate);
+        }
+
+
+        Predicate orPredicate = criteriaBuilder.or(predicates.toArray(new Predicate[0]));
+
+        Predicate andPredicate = criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+
+        //output
+        userCriteriaQuery.where(andPredicate);
+
+        TypedQuery<User> query = entityManager.createQuery(userCriteriaQuery);
+        return query.getResultList();
+    }
+
 
     private UserDto userToDto(User user){
         UserDto userDto = new UserDto();
