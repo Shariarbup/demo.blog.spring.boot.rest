@@ -9,14 +9,21 @@ import com.bjit.demo_blog.repositories.RoleRepository;
 import com.bjit.demo_blog.repositories.UserRepository;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.ExcelHelper;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -102,6 +109,25 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
 
         }
+    }
+
+    @Override
+    public String exportUserListPdf(String reportFormat) throws FileNotFoundException, JRException {
+        String path = "E:\\";
+        List<User> users = userRepository.findAll();
+        File file = ResourceUtils.getFile("classpath:user-list.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(users);
+        Map<String, Object> params = new HashMap<>();
+        params.put("createdBy", "Al Shariar");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, jrBeanCollectionDataSource);
+        if(reportFormat.equalsIgnoreCase("html")) {
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "user-list.html");
+        }
+        if(reportFormat.equalsIgnoreCase("pdf")) {
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "user-list.pdf");
+        }
+        return "Report generated successfully to this path : "+ path;
     }
 
     private UserDto userToDto(User user){

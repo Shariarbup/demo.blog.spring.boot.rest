@@ -15,6 +15,7 @@
  - Spring boot starter validation
  - Apache poi
  - Apache poi ooxml
+ - Jasper Report
 
  
  Database:
@@ -78,3 +79,8 @@ http://localhost:9090/swagger-ui/index.html
 - Go- https://console.cloud.google.com/
 - Create an app
 - Then got Rest API and Services -> Create credentials -> Oauth client id -> Applicatio Type(desktop App)
+
+
+# Jasper studio
+
+Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersoft%C2%AE-studio-community-edition/

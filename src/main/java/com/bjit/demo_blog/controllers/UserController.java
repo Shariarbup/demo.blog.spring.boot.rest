@@ -56,8 +56,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @PostMapping("/users/upload")
-    public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file) {
+    @PostMapping(value = "/users/upload", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> upload(@RequestPart("file")MultipartFile file) {
         if(ExcelHelper.checkExcelFormat(file)) {
             this.userService.saveUserFromImportExcel(file);
             return ResponseEntity.ok(Map.of("message", "File is uploaded and data is save successfully"));

@@ -1,8 +1,10 @@
 package com.bjit.demo_blog.services;
 
 import com.bjit.demo_blog.payloads.UserDto;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface UserService {
@@ -13,4 +15,6 @@ public interface UserService {
     List<UserDto> getAllUsers();
     void deleteUser(Long userId);
     void saveUserFromImportExcel(MultipartFile file);
+
+    String exportUserListPdf(String reportFormat) throws FileNotFoundException, JRException;
 }
