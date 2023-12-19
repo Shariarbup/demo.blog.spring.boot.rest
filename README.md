@@ -84,3 +84,13 @@ http://localhost:9090/swagger-ui/index.html
 # Jasper studio
 
 Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersoft%C2%AE-studio-community-edition/
+
+
+# Jasper report different firld:
+- Parameter - $P{} -> simple input to the subreport (<parameter_key>(string), value(object)), you can pass this to subreport or datasource
+- Fields - $F{} -> Fields is the datasource object that are passed to the report, Fields are also contain multiple entries
+, ex: column entries in a table
+- Variable - $V{} -> Variables are not data passed to report that they are created in the report to hold aggregated values
+They are predefined variables in the jasper report
+- Internationalization - $R{} -> This holds the key of the resource bundle to support internationalization. Based on the key and locale 
+provided it gets corresponding value from resource bundle
