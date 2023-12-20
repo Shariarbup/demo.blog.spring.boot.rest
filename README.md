@@ -95,4 +95,6 @@ They are predefined variables in the jasper report
 - Internationalization - $R{} -> This holds the key of the resource bundle to support internationalization. Based on the key and locale 
 provided it gets corresponding value from resource 
 - There are some step for creating Jasper report which is given below
-- ![img.png](img.png)
+- ![img.png](jasper_report_procedure.png)
+- How Nutrition table get the value
+- ![img_1.png](nutrition_table.png)
