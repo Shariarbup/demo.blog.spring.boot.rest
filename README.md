@@ -93,4 +93,6 @@ Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersof
 - Variable - $V{} -> Variables are not data passed to report that they are created in the report to hold aggregated values
 They are predefined variables in the jasper report
 - Internationalization - $R{} -> This holds the key of the resource bundle to support internationalization. Based on the key and locale 
-provided it gets corresponding value from resource bundle
+provided it gets corresponding value from resource 
+- There are some step for creating Jasper report which is given below
+- ![img.png](img.png)

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Nutrition" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7437a413-b79b-4db7-9a2b-4d9ca0505c2f">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="firstName" class="java.lang.String"/>
+    <parameter name="lastName" class="java.lang.String"/>
+    <parameter name="dob" class="java.lang.String"/>
+    <parameter name="age" class="java.lang.Integer"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="74" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="-6" y="0" width="555" height="73" backcolor="#ED2724" uuid="b82a6708-7b97-465f-83c3-75ca3de46005"/>
+                <staticText>
+                    <reportElement x="10" y="10" width="200" height="50" forecolor="#FAF3F2" backcolor="#080807" uuid="dd556bce-c972-4576-8390-c20e0ff84f68"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+                        <font size="25"/>
+                    </textElement>
+                    <text><![CDATA[Nutrtion Report]]></text>
+                </staticText>
+                <textField evaluationTime="Report" isBlankWhenNull="true">
+                    <reportElement x="416" y="0" width="133" height="30" forecolor="#FFFFFF" uuid="e8fd236e-e414-42ba-ba34-3420001c0768"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="12"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Name: " + $P{firstName}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="416" y="30" width="132" height="20" forecolor="#FFFFFF" uuid="97cca935-c5a6-4464-8dba-c558b38c8913"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="12"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["DOB: " + $P{dob}]]></textFieldExpression>
+                    <patternExpression><![CDATA["DOB: " + $P{dob}]]></patternExpression>
+                </textField>
+                <textField>
+                    <reportElement x="416" y="50" width="134" height="22" forecolor="#FFFFFF" uuid="e7a5fb05-ea26-46ab-bf0a-daf0f500c32b"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="14"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Age: " + $P{age}]]></textFieldExpression>
+                    <patternExpression><![CDATA["Age: "+$P{age}]]></patternExpression>
+                </textField>
+            </frame>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="38" splitType="Stretch">
+            <frame>
+                <reportElement x="240" y="-1" width="309" height="36" uuid="64f7d1cc-78d4-4409-b2e9-afb7e07912a8"/>
+                <staticText>
+                    <reportElement x="0" y="-1" width="140" height="39" uuid="aa506b48-2a45-4b95-ba43-ab575ac003f2"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="12"/>
+                    </textElement>
+                    <text><![CDATA[Report Generation Time: ]]></text>
+                </staticText>
+                <textField pattern="MMMMM dd, yyyy">
+                    <reportElement x="140" y="-1" width="165" height="39" uuid="3a309b09-eaaf-4ee0-b9f2-5a452ac3adba"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="61" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="125" splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+</jasperReport>
