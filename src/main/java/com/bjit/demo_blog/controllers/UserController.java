@@ -9,6 +9,8 @@ import com.bjit.demo_blog.utils.SearchRequest;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,13 +48,23 @@ public class UserController {
         return new ResponseEntity(new ApiResponse("User Deleted Successfully", true),HttpStatus.OK);
     }
 
+    //    @GetMapping("/users")
     //GET - get user
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAllusers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-//    @GetMapping("/users")
+    //GET - get user
+    @GetMapping("/users/withPagination")
+    public ResponseEntity<List<UserDto>> getAllusersWithPagination(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+                                                                   @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
+                                                                   ){
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return ResponseEntity.ok(userService.getAllUsersWithPagination(pageable));
+    }
+
+
     @GetMapping("/users/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId){
         return ResponseEntity.ok(userService.getUserById(userId));

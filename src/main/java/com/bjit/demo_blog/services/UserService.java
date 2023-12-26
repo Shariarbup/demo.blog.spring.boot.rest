@@ -4,6 +4,7 @@ import com.bjit.demo_blog.entity.User;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.utils.SearchRequest;
 import net.sf.jasperreports.engine.JRException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
@@ -23,4 +24,6 @@ public interface UserService {
     List<User> findAllBySimpleQuery(Long id, String name, String email);
 
     List<User> findAllByAdvancedQuery(SearchRequest searchRequest);
+
+    List<UserDto> getAllUsersWithPagination(Pageable pageable);
 }

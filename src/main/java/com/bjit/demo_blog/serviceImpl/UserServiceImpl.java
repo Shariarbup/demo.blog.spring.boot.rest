@@ -20,6 +20,8 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -199,6 +201,14 @@ public class UserServiceImpl implements UserService {
 
         TypedQuery<User> query = entityManager.createQuery(userCriteriaQuery);
         return query.getResultList();
+    }
+
+    @Override
+    public List<UserDto> getAllUsersWithPagination(Pageable pageable) {
+        Page<User> userPage = userRepository.findAll(pageable);
+        List<User> userList = userPage.getContent();
+        List<UserDto> userDtos = userList.stream().map(user -> userToDto(user)).collect(Collectors.toList());
+        return  userDtos;
     }
 
 
