@@ -28,6 +28,14 @@
 - Notepad
 - Chrome
 
+# IDE Tutorial
+
+- Alt + Entr press korle local variable assign hoi
+- ctrl + F full project e kono text search korar jonne use
+- ctrl + N full project e file search korar jonne use hoi
+- ctrl + G - ekta file jekono line e jaoar jonne use hoi
+- ctrl + shift + enter - jekono line theke next new line e jete chaile
+
 # Username and Password
 - Two role automatically created when first running the project
 - One user need to created for login into the system
@@ -50,14 +58,6 @@ http://localhost:9090/swagger-ui/index.html
 1. Used email: itmasjoy@gmail.com
 2. Used mobile number: 01968385155
 
-
-
-# Tutorial
-
-- Alt + Entr press korle local variable assign hoi
-- ctrl + F full project e kono text search korar jonne use
-- ctrl + N full project e file search korar jonne use hoi
-- ctrl + G - ekta file jekono line e jaoar jonne use hoi
 
 # How to create github app
 
@@ -102,3 +102,7 @@ provided it gets corresponding value from resource
 # Pagination
 - ekbare 5 ta row return korle page er size-5 and page-1
 - example: http://localhost:9090/posts?pageSize=5&pageNo=2&sortBy=title
+
+# Multi threading
+- https://www.mockaroo.com/
+- Uporer ei site theke mock data populate kora jai 
