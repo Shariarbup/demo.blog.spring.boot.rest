@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ExcelHelper {
 
-    Logger logger = LoggerFactory.getLogger(ExcelHelper.class);
+    static Logger logger = LoggerFactory.getLogger(ExcelHelper.class);
     public static String[] HEADERS={
             "ID",
             "ABOUT",
@@ -127,7 +127,7 @@ public class ExcelHelper {
         return list;
     }
 
-    private List<User> parseCSVFile(final MultipartFile file) throws Exception {
+    public static List<User> parseCSVFileForImportUser(final MultipartFile file) throws Exception {
         final List<User> users = new ArrayList<>();
         try {
             try (final BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
