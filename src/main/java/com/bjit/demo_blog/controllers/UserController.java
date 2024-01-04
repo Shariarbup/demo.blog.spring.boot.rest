@@ -70,12 +70,6 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @GetMapping("/users/advancedQeuery")
-    public ResponseEntity<List<User>> getUserByAdvancedQuery(
-            SearchRequest searchRequest
-    ){
-        return ResponseEntity.ok(userService.findAllByAdvancedQuery(searchRequest));
-    }
 
     @PostMapping(value = "/users/upload", consumes = {"multipart/form-data"})
     public ResponseEntity<?> upload(@RequestPart("file")MultipartFile file) {

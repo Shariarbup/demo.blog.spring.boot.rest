@@ -26,4 +26,6 @@ public interface UserService {
     List<User> findAllByAdvancedQuery(SearchRequest searchRequest);
 
     List<UserDto> getAllUsersWithPagination(Pageable pageable);
+
+    List<User> findUserWhereUserIdisOneCriteriaSelect();
 }

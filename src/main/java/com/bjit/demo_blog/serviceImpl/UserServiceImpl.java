@@ -204,12 +204,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findUserWhereUserIdisOneCriteriaSelect() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+
+//        userCriteriaQuery.select(root);
+
+        userCriteriaQuery.where(criteriaBuilder.equal(root.get("id"), 1));
+
+        TypedQuery<User> query = entityManager.createQuery(userCriteriaQuery);
+
+        return query.getResultList();
+    }
+
+    @Override
     public List<UserDto> getAllUsersWithPagination(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable);
         List<User> userList = userPage.getContent();
         List<UserDto> userDtos = userList.stream().map(user -> userToDto(user)).collect(Collectors.toList());
         return  userDtos;
     }
+
 
 
     private UserDto userToDto(User user){
