@@ -1,6 +1,7 @@
 package com.bjit.demo_blog.controllers;
 
 import com.bjit.demo_blog.entity.User;
+import com.bjit.demo_blog.payloads.UserDTOShorter;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.SearchRequest;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -31,6 +32,24 @@ public class CriteriaQueryController {
     public ResponseEntity<List<User>> getUserCriteriaSelect(
     ){
         return ResponseEntity.ok(userService.findUserWhereUserIdisOneCriteriaSelect());
+    }
+
+    @GetMapping(value = "/users/criteria/selectUsernameList", produces = "application/json")
+    public ResponseEntity<List<String>> getUserNameListOnlyCriteriaSelect(
+    ){
+        return ResponseEntity.ok(userService.findUserNameListCriteriaSelect());
+    }
+
+    @GetMapping(value = "/users/criteria/selectMultipleUserColumnList", produces = "application/json")
+    public ResponseEntity<List<User>> getMultipleUserColumnListCriteriaSelect(
+    ){
+        return ResponseEntity.ok(userService.findMultipleUserColumnListCriteriaSelect());
+    }
+
+    @GetMapping(value = "/users/criteria/selectMultipleUserDtoShorterColumnList", produces = "application/json")
+    public ResponseEntity<List<UserDTOShorter>> getMultipleUserDtoShorterColumnListCriteriaSelect(
+    ){
+        return ResponseEntity.ok(userService.findMultipleUserDtoShorterColumnListCriteriaSelect());
     }
 
 }

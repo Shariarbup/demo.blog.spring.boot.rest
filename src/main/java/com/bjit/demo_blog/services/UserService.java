@@ -1,6 +1,7 @@
 package com.bjit.demo_blog.services;
 
 import com.bjit.demo_blog.entity.User;
+import com.bjit.demo_blog.payloads.UserDTOShorter;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.utils.SearchRequest;
 import net.sf.jasperreports.engine.JRException;
@@ -28,4 +29,10 @@ public interface UserService {
     List<UserDto> getAllUsersWithPagination(Pageable pageable);
 
     List<User> findUserWhereUserIdisOneCriteriaSelect();
+
+    List<String> findUserNameListCriteriaSelect();
+
+    List<User> findMultipleUserColumnListCriteriaSelect();
+
+    List<UserDTOShorter> findMultipleUserDtoShorterColumnListCriteriaSelect();
 }

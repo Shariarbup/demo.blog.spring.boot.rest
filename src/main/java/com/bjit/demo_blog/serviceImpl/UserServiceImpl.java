@@ -4,6 +4,7 @@ import com.bjit.demo_blog.config.AppConstants;
 import com.bjit.demo_blog.entity.Role;
 import com.bjit.demo_blog.entity.User;
 import com.bjit.demo_blog.exceptions.ResourceNotFoundException;
+import com.bjit.demo_blog.payloads.UserDTOShorter;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.repositories.RoleRepository;
 import com.bjit.demo_blog.repositories.UserRepository;
@@ -12,10 +13,7 @@ import com.bjit.demo_blog.utils.ExcelHelper;
 import com.bjit.demo_blog.utils.SearchRequest;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.modelmapper.ModelMapper;
@@ -216,6 +214,67 @@ public class UserServiceImpl implements UserService {
         userCriteriaQuery.where(criteriaBuilder.equal(root.get("id"), 1));
 
         TypedQuery<User> query = entityManager.createQuery(userCriteriaQuery);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<String> findUserNameListCriteriaSelect() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<String> userCriteriaQuery = criteriaBuilder.createQuery(String.class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+
+        userCriteriaQuery.select(root.get("name"));
+
+        TypedQuery<String> query = entityManager.createQuery(userCriteriaQuery);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<User> findMultipleUserColumnListCriteriaSelect() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> userCriteriaQuery = criteriaBuilder.createQuery(Object[].class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+
+        Path<Object> namePath = root.get("name");
+        Path<Object> emailPath = root.get("email");
+
+//        userCriteriaQuery.select(criteriaBuilder.array(namePath, emailPath));
+
+        userCriteriaQuery.multiselect(namePath, emailPath);
+
+        TypedQuery<Object[]> query = entityManager.createQuery(userCriteriaQuery);
+
+        List<User> userList = new ArrayList<>();
+        query.getResultList().forEach(userObj->{
+            User user = new User();
+            user.setName((String) userObj[0]);
+            user.setEmail((String) userObj[1]);
+            userList.add(user);
+        });
+        return userList;
+    }
+
+    @Override
+    public List<UserDTOShorter> findMultipleUserDtoShorterColumnListCriteriaSelect() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserDTOShorter> userCriteriaQuery = criteriaBuilder.createQuery(UserDTOShorter.class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+
+        Path<Object> namePath = root.get("name");
+        Path<Object> emailPath = root.get("email");
+        Path<Object> aboutPath = root.get("about");
+
+        userCriteriaQuery.select(criteriaBuilder.construct(UserDTOShorter.class, namePath, emailPath, aboutPath));
+
+        TypedQuery<UserDTOShorter> query = entityManager.createQuery(userCriteriaQuery);
 
         return query.getResultList();
     }
