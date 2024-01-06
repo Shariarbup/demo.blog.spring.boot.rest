@@ -5,6 +5,7 @@ import com.bjit.demo_blog.payloads.UserDTOShorter;
 import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.SearchRequest;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,12 @@ public class CriteriaQueryController {
     public ResponseEntity<List<UserDTOShorter>> getMultipleUserDtoShorterColumnListCriteriaSelect(
     ){
         return ResponseEntity.ok(userService.findMultipleUserDtoShorterColumnListCriteriaSelect());
+    }
+
+    @GetMapping(value = "/users/criteria/selectUserTuples", produces = "application/json")
+    public ResponseEntity<List<Tuple>> getMultipleUserDtoShorterTupleListCriteriaSelect(
+    ){
+        return ResponseEntity.ok(userService.getUserTuple());
     }
 
 }

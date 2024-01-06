@@ -12,6 +12,7 @@ import com.bjit.demo_blog.services.UserService;
 import com.bjit.demo_blog.utils.ExcelHelper;
 import com.bjit.demo_blog.utils.SearchRequest;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import net.sf.jasperreports.engine.*;
@@ -275,6 +276,25 @@ public class UserServiceImpl implements UserService {
         userCriteriaQuery.select(criteriaBuilder.construct(UserDTOShorter.class, namePath, emailPath, aboutPath));
 
         TypedQuery<UserDTOShorter> query = entityManager.createQuery(userCriteriaQuery);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Tuple> getUserTuple() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> userCriteriaQuery = criteriaBuilder.createQuery(Tuple.class);
+
+        // select * from user
+        Root<User> root = userCriteriaQuery.from(User.class);
+
+        Path<Object> namePath = root.get("name");
+        Path<Object> emailPath = root.get("email");
+        Path<Object> aboutPath = root.get("about");
+
+        userCriteriaQuery.multiselect(namePath, emailPath, aboutPath);
+
+        TypedQuery<Tuple> query = entityManager.createQuery(userCriteriaQuery);
 
         return query.getResultList();
     }
