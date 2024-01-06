@@ -4,7 +4,6 @@ import com.bjit.demo_blog.entity.User;
 import com.bjit.demo_blog.payloads.UserDTOShorter;
 import com.bjit.demo_blog.payloads.UserDto;
 import com.bjit.demo_blog.utils.SearchRequest;
-import jakarta.persistence.Tuple;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,5 +36,5 @@ public interface UserService {
 
     List<UserDTOShorter> findMultipleUserDtoShorterColumnListCriteriaSelect();
 
-    List<Tuple> getUserTuple();
+    List<UserDTOShorter> getUserTuple();
 }

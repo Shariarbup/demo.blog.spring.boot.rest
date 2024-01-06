@@ -281,7 +281,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Tuple> getUserTuple() {
+    public List<UserDTOShorter> getUserTuple() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> userCriteriaQuery = criteriaBuilder.createQuery(Tuple.class);
 
@@ -296,7 +296,17 @@ public class UserServiceImpl implements UserService {
 
         TypedQuery<Tuple> query = entityManager.createQuery(userCriteriaQuery);
 
-        return query.getResultList();
+        List<Tuple> userTuples = query.getResultList();
+        List<UserDTOShorter> userDTOShorters = new ArrayList<>();
+        userTuples.forEach(tuple -> {
+            UserDTOShorter userDTOShorter = new UserDTOShorter();
+            userDTOShorter.setName((String) tuple.get(namePath));
+            userDTOShorter.setEmail((String) tuple.get(emailPath));
+            userDTOShorter.setAbout((String) tuple.get(aboutPath));
+            userDTOShorters.add(userDTOShorter);
+        });
+
+        return userDTOShorters;
     }
 
     @Override
