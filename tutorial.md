@@ -67,3 +67,17 @@ Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersof
 # Multi threading
 - https://www.mockaroo.com/
 - Uporer ei site theke mock data populate kora jai 
+
+# Query
+
+## LEFT JOIN
+`SELECT DISTINCT c.* FROM blog.customers c LEFT JOIN blog.orders o ON c.id = o.customer_id;`
+- pura customer er list ta dibe customer_id order table e thakuk ba na thakuk
+
+## RIGHT JOIN
+`SELECT DISTINCT c.* FROM blog.customers c RIGHT JOIN blog.orders o ON c.id = o.customer_id;`
+- ei query er mane hoilo sheishob Customer er list diba jader id order table e ashe
+
+## JOIN
+`SELECT DISTINCT c.* FROM blog.customers c JOIN blog.orders o ON c.id = o.customer_id;`
+- ei query er mane hoilo sheishob Customer er list diba jader id order table e ashe, ei query RIGHT JOIN er moto kaj korbe

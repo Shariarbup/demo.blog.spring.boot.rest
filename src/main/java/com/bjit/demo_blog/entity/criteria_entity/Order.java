@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Customer customer;
