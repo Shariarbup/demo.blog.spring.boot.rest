@@ -81,3 +81,13 @@ Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersof
 ## INNER JOIN/ JOIN
 `SELECT DISTINCT c.* FROM blog.customers c JOIN blog.orders o ON c.id = o.customer_id;`
 - ei query er mane hoilo sheishob Customer er list diba jader id order table e ashe, ei query RIGHT JOIN er moto kaj korbe
+
+
+## ONLY GETTING CUSTOMER NAME
+`SELECT c.first_name FROM blog.orders o JOIN  blog.customers c ON o.customer_id = c.id;`
+- ei query er mane hoilo Order table e joto gula customer ashe shei customer gular name er list return korbe
+
+## GETTING CUSTOMER NAME AND THEIR ORDER COUNT
+`SELECT c.first_name, COUNT(o.id) FROM blog.orders o JOIN  blog.customers c ON o.customer_id = c.id GROUP BY
+c.first_name;`
+- order table joto gula custutomer ashe sheigular distinct name and order count ashbe
