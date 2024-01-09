@@ -7,7 +7,9 @@ import java.util.List;
 
 @Service
 public interface CustomerService {
-    public List<Customer> getCustomerLeftJoinOrder();
+    List<Customer> getCustomerLeftJoinOrder();
 
-    public List<Customer> getCustomerRightJoinOrder();
+    List<Customer> getCustomerRightJoinOrder();
+
+    List<Customer> getCustomerInnerJoinOrder();
 }

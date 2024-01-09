@@ -78,6 +78,6 @@ Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersof
 `SELECT DISTINCT c.* FROM blog.customers c RIGHT JOIN blog.orders o ON c.id = o.customer_id;`
 - ei query er mane hoilo sheishob Customer er list diba jader id order table e ashe
 
-## JOIN
+## INNER JOIN/ JOIN
 `SELECT DISTINCT c.* FROM blog.customers c JOIN blog.orders o ON c.id = o.customer_id;`
 - ei query er mane hoilo sheishob Customer er list diba jader id order table e ashe, ei query RIGHT JOIN er moto kaj korbe
