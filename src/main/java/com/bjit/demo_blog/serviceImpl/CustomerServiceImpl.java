@@ -46,4 +46,15 @@ public class CustomerServiceImpl implements CustomerService {
         TypedQuery<Customer> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }
+
+    @Override
+    public List<String> getCustomerNameListFromOrderTable() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<String> query = cb.createQuery(String.class);
+        Root<Order> orderRoot = query.from(Order.class);
+        Join<Order, Customer> customerJoin = orderRoot.join("customers", JoinType.INNER);
+        query.select(customerJoin.get("firstName"));
+        List<String> customerNames = entityManager.createQuery(query).getResultList();
+        return customerNames;
+    }
 }

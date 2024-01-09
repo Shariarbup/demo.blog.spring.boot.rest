@@ -12,4 +12,6 @@ public interface CustomerService {
     List<Customer> getCustomerRightJoinOrder();
 
     List<Customer> getCustomerInnerJoinOrder();
+
+    List<String> getCustomerNameListFromOrderTable();
 }
