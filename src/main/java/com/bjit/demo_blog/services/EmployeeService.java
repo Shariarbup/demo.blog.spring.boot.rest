@@ -37,6 +37,26 @@ public class EmployeeService {
         Root<Employee> root = criteriaQuery.from(Employee.class);
         criteriaQuery.select(criteriaBuilder.avg(root.get("salary")));
         Double result = entityManager.createQuery(criteriaQuery).getSingleResult();
-        System.out.println("Max average Of Employee: "+ result);
+        System.out.println("Average salary Of Employees: "+ result);
     }
+
+    public void employeesSumOfSalaryCriteriaQuery() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Double> criteriaQuery = criteriaBuilder.createQuery(Double.class);
+        Root<Employee> root = criteriaQuery.from(Employee.class);
+        criteriaQuery.select(criteriaBuilder.sum(root.get("salary")));
+        Double result = entityManager.createQuery(criteriaQuery).getSingleResult();
+        System.out.println("Sum Of salary of Employees: "+ result);
+    }
+
+    public void  countDistinctEmployeeCriteriaQuery() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        Root<Employee> root = criteriaQuery.from(Employee.class);
+        criteriaQuery.select(criteriaBuilder.countDistinct(root));
+        Long result = entityManager.createQuery(criteriaQuery).getSingleResult();
+        System.out.println("Number of Distinct Employees: "+ result);
+
+    }
+
 }
