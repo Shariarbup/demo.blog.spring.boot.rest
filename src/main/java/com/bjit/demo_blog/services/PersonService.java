@@ -8,10 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,6 +74,21 @@ public class PersonService {
             System.out.println(person.toString());
             System.out.println("Call Details");
             List<Call> calls = phone.getCalls();
+        }
+    }
+
+    public void criteriaQueryParameter() {
+        String nickName = "Shariar";
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Person> query = criteriaBuilder.createQuery(Person.class);
+        Root<Person> personRoot = query.from(Person.class);
+        ParameterExpression<String> nickNameParameter = criteriaBuilder.parameter(String.class);
+        query.where(criteriaBuilder.equal(personRoot.get("nickName"), nickNameParameter));
+        TypedQuery<Person> typedQuery = entityManager.createQuery(query);
+        typedQuery.setParameter(nickNameParameter, nickName);
+        List<Person> personList = typedQuery.getResultList();
+        for (Person person : personList) {
+            System.out.println(person.toString());
         }
     }
 }
