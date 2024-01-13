@@ -1,9 +1,11 @@
 package com.bjit.demo_blog.services;
 
 import com.bjit.demo_blog.entity.criteria_entity.Employee;
+import com.bjit.demo_blog.entity.criteria_entity.dto.EmployeeStatisticsInfo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +59,20 @@ public class EmployeeService {
         Long result = entityManager.createQuery(criteriaQuery).getSingleResult();
         System.out.println("Number of Distinct Employees: "+ result);
 
+    }
+
+    public void writeaggregateFunctionToDTO() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<EmployeeStatisticsInfo> query = criteriaBuilder.createQuery(EmployeeStatisticsInfo.class);
+        Root<Employee> employeeRoot = query.from(Employee.class);
+        Expression<Long> totalNumberOfEmployees = criteriaBuilder.count(employeeRoot);
+        Expression<Long> totalNumberOfDistinctEmployees = criteriaBuilder.countDistinct(employeeRoot);
+        Expression<Double> maxSalaryOftheEmployee = criteriaBuilder.max(employeeRoot.get("salary"));
+        Expression<Double> averageSalaryOftheEmployee = criteriaBuilder.avg(employeeRoot.get("salary"));
+        Expression<Number> sumOfSalaryOfEmployee = criteriaBuilder.sum(employeeRoot.get("salary"));
+        query.select(criteriaBuilder.construct(EmployeeStatisticsInfo.class, totalNumberOfEmployees, totalNumberOfDistinctEmployees, maxSalaryOftheEmployee, averageSalaryOftheEmployee, sumOfSalaryOfEmployee));
+        EmployeeStatisticsInfo result = entityManager.createQuery(query).getSingleResult();
+        System.out.println();
     }
 
 }
