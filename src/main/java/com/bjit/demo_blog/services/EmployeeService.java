@@ -96,4 +96,22 @@ public class EmployeeService {
         }
     }
 
+    public void criteriaQueryWithGroupByAndHaving() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = criteriaBuilder.createQuery(Object[].class);
+        Root<Employee> employeeRoot = query.from(Employee.class);
+        query.multiselect(criteriaBuilder.count(employeeRoot.get("name")), criteriaBuilder.sum(employeeRoot.get("salary")), employeeRoot.get("department"));
+        query.groupBy(employeeRoot.get("department"));
+        query.having(criteriaBuilder.greaterThan(criteriaBuilder.sum(employeeRoot.get("salary")), 2000));
+        List<Object[]> resultList = entityManager.createQuery(query).getResultList();
+        for(Object[] objects : resultList) {
+            Department department = (Department) objects[2];
+            System.out.println(department.getId()+"\t"+department.getName());
+            long count = (Long) objects[0];
+            System.out.println("Count : " + count);
+            Double salary = (Double) objects[1];
+            System.out.println("Salary: "+salary);
+        }
+    }
+
 }
