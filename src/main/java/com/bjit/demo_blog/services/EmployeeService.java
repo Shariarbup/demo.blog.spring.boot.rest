@@ -72,7 +72,7 @@ public class EmployeeService {
         Expression<Number> sumOfSalaryOfEmployee = criteriaBuilder.sum(employeeRoot.get("salary"));
         query.select(criteriaBuilder.construct(EmployeeStatisticsInfo.class, totalNumberOfEmployees, totalNumberOfDistinctEmployees, maxSalaryOftheEmployee, averageSalaryOftheEmployee, sumOfSalaryOfEmployee));
         EmployeeStatisticsInfo result = entityManager.createQuery(query).getSingleResult();
-        System.out.println();
+        System.out.println("EmployeeStatistics info"+ result.toString());
     }
 
 }
