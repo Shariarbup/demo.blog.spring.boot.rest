@@ -1,5 +1,6 @@
 package com.bjit.demo_blog.services;
 
+import com.bjit.demo_blog.entity.criteria_entity.Department;
 import com.bjit.demo_blog.entity.criteria_entity.Employee;
 import com.bjit.demo_blog.entity.criteria_entity.dto.EmployeeStatisticsInfo;
 import jakarta.persistence.EntityManager;
@@ -9,6 +10,8 @@ import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -61,7 +64,7 @@ public class EmployeeService {
 
     }
 
-    public void writeaggregateFunctionToDTO() {
+    public void writeAggregateFunctionToDTO() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<EmployeeStatisticsInfo> query = criteriaBuilder.createQuery(EmployeeStatisticsInfo.class);
         Root<Employee> employeeRoot = query.from(Employee.class);
@@ -73,6 +76,24 @@ public class EmployeeService {
         query.select(criteriaBuilder.construct(EmployeeStatisticsInfo.class, totalNumberOfEmployees, totalNumberOfDistinctEmployees, maxSalaryOftheEmployee, averageSalaryOftheEmployee, sumOfSalaryOfEmployee));
         EmployeeStatisticsInfo result = entityManager.createQuery(query).getSingleResult();
         System.out.println("EmployeeStatistics info"+ result.toString());
+    }
+
+    private void joinTwoTableAndFetchBothTableData() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = criteriaBuilder.createQuery(Object[].class);
+        Root<Employee> employeeRoot = query.from(Employee.class);
+        Root<Department> departmentRoot = query.from(Department.class);
+
+        query.multiselect(employeeRoot, departmentRoot);
+
+        query.where(criteriaBuilder.equal(employeeRoot.get("department"), departmentRoot.get("id")));
+        List<Object[]> resultList = entityManager.createQuery(query).getResultList();
+        for(Object[] objects : resultList) {
+            Employee employee = (Employee) objects[0];
+            System.out.println("Employee Information"+ employee.toString());
+            Department department = (Department) objects[1];
+            System.out.println("Department Information"+ department.toString());
+        }
     }
 
 }
