@@ -4,6 +4,7 @@ import com.bjit.demo_blog.entity.criteria_entity.Department;
 import com.bjit.demo_blog.entity.criteria_entity.Employee;
 import com.bjit.demo_blog.entity.criteria_entity.dto.EmployeeStatisticsInfo;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
@@ -111,6 +112,19 @@ public class EmployeeService {
             System.out.println("Count : " + count);
             Double salary = (Double) objects[1];
             System.out.println("Salary: "+salary);
+        }
+    }
+
+    public void criteriaQueryWithOrderBy() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Employee> query = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = query.from(Employee.class);
+        query.select(employeeRoot);
+        query.orderBy(criteriaBuilder.asc(employeeRoot.get("salary")));
+        TypedQuery<Employee> result = entityManager.createQuery(query);
+        List<Employee> employees = result.getResultList();
+        for (Employee employee : employees) {
+            System.out.println("Employee: " + employee.toString());
         }
     }
 
