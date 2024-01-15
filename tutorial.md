@@ -91,3 +91,6 @@ Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersof
 `SELECT c.first_name, COUNT(o.id) FROM blog.orders o JOIN  blog.customers c ON o.customer_id = c.id GROUP BY
 c.first_name;`
 - order table joto gula custutomer ashe sheigular distinct name and order count ashbe
+
+# Caching
+- Caching korar jonne amader @EnableCaching application upor tag diya lagbe 
