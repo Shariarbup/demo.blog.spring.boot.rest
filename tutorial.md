@@ -93,4 +93,11 @@ c.first_name;`
 - order table joto gula custutomer ashe sheigular distinct name and order count ashbe
 
 # Caching
-- Caching korar jonne amader @EnableCaching application upor tag diya lagbe 
+- Caching korar jonne amader @EnableCaching application upor tag diya 
+- And nicher method gula amader service method er upor add kora lagbe
+For Update method:
+- @CachePut(cacheNames = "users", key = "#userDto.userId")
+For get method
+- @Cacheable(cacheNames = "users", key = "#userId")
+For Delete method
+- @CacheEvict(cacheNames = "users", key = "#userId")

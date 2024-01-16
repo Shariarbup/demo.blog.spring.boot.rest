@@ -19,6 +19,9 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -70,6 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CachePut(cacheNames = "users", key = "#userDto.userId")
     public UserDto updateUser(UserDto userDto, Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "id", userId));
         user.setName(userDto.getName());
@@ -81,6 +85,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(cacheNames = "users", key = "#userId")
     public UserDto getUserById(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "id", userId));
         return userToDto(user);
@@ -94,6 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "users", key = "#userId")
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "id", userId));
         userRepository.delete(user);
