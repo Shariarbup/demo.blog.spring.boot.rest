@@ -16,6 +16,8 @@
  - Apache poi
  - Apache poi ooxml
  - Jasper Report
+ - Spring boot starter caching
+ - Spring boot auditing
 
  
  Database:

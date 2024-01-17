@@ -48,13 +48,13 @@ public class UserController {
 
     //    @GetMapping("/users")
     //GET - get user
-    @GetMapping("/users")
+    @GetMapping(value = "/users", produces = "application/json")
     public ResponseEntity<List<UserDto>> getAllusers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     //GET - get user
-    @GetMapping("/users/withPagination")
+    @GetMapping(value = "/users/withPagination", produces = "application/json")
     public ResponseEntity<List<UserDto>> getAllusersWithPagination(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
                                                                    @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
                                                                    ){
@@ -63,7 +63,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/users/{userId}")
+    @GetMapping(value = "/users/{userId}", produces = "application/json")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId){
         return ResponseEntity.ok(userService.getUserById(userId));
     }
