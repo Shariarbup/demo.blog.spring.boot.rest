@@ -116,4 +116,13 @@ For Delete method
       <scope>test</scope>
     </dependency>
   ```
+  - Mariadb Test container dependency
+    ```
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>mariadb</artifactId>
+    <version>1.19.3</version>
+    <scope>test</scope>
+</dependency>
+    ```
   
