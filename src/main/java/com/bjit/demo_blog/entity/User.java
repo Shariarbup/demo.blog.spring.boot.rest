@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,10 +48,29 @@ public class User implements UserDetails {
     private List<Token> tokens;
 
     @CreatedDate
+    @Column(
+            nullable = false,
+            updatable = false
+    )
     private LocalDate createdDate;
 
     @LastModifiedDate
+    @Column(insertable = false)
     private LocalDate lastModifiedDate;
+
+    @CreatedBy
+    @Column(
+            nullable = false,
+            updatable = false
+    )
+    private Long createdBy;
+
+    @LastModifiedBy
+    @Column(
+          insertable = false
+    )
+    private Long lastModifiedBy;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

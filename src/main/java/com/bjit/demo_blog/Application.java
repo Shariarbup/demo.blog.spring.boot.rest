@@ -19,7 +19,7 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableCaching
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class Application implements CommandLineRunner {
 
 	@Autowired
