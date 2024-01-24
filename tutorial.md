@@ -132,5 +132,6 @@ For Delete method
     
     ```
   # How to install docker Docker
-- install wsl 2 backer
+- install wsl 2(windows subsystem linux) backend
 - Docker Desktop Installation guideline - `https://docs.docker.com/desktop/install/windows-install/`
+- check docker version --- docker -v 
