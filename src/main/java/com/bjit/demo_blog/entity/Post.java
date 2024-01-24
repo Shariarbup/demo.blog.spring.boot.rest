@@ -1,9 +1,8 @@
 package com.bjit.demo_blog.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.bjit.demo_blog.custom_validator.ImageNameValid;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.util.Date;
@@ -24,6 +23,7 @@ public class Post {
     private String title;
     @Column(length = 1000)
     private String content;
+    @ImageNameValid
     private String imageName;
     private Date addedDate;
     @ManyToOne

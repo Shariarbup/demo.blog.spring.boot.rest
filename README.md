@@ -18,6 +18,7 @@
  - Jasper Report
  - Spring boot starter caching
  - Spring boot auditing
+ - Spring boot custom validator
 
  
  Database:
