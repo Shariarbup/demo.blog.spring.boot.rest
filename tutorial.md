@@ -135,3 +135,5 @@ For Delete method
 - install wsl 2(windows subsystem linux) backend
 - Docker Desktop Installation guideline - `https://docs.docker.com/desktop/install/windows-install/`
 - check docker version --- docker -v 
+- pull odkcer image from docker hub --- docker pull hello-world (hello-world name er image docker hub theke pull korar niyom)
+- 
