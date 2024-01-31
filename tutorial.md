@@ -145,3 +145,10 @@ For Delete method
 - docker ps -a (shob container dekhar jonne)
 - docker run -env MYSQL_ROOT_PASSWORD=root( docker environment e mysql password daoar jonne)
 - docker run --name pythonContainer -d python (ekhane d mane detach and pythonContainer conatiner er name)
+- docker run --name pythonContainer -it -d python(it mane hoilo interactive)
+- docker exec -it container_id python3 (ekta container er moddhe python3 exec korbe)
+- MySQL run korar miyom- docker run mysqlDb -e MYSQL_ROOT_PASSWORD=root -d mysql
+- docker inspect mysqlDb(mysqlDb container er full structure dekhabe)
+- docker exec -it mysqlDb bash(eita mysqlDb container run hbe)
+- then mysql -p er maddhome password dite hobe
+- 
