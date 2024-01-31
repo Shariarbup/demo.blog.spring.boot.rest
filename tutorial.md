@@ -48,10 +48,10 @@ Dowload community Link- https://community.jaspersoft.com/files/file/19-jaspersof
 
 
 # Jasper report different firld:
-- Parameter - $P{} -> simple input to the subreport (<parameter_key>(string), value(object)), you can pass this to subreport or datasource
+- Parameter - $P{} -> (eita params use kora jai) simple input to the subreport (<parameter_key>(string), value(object)), you can pass this to subreport or datasource
 - Fields - $F{} -> Fields is the datasource object that are passed to the report, Fields are also contain multiple entries
   , ex: column entries in a table
-- Variable - $V{} -> Variables are not data passed to report that they are created in the report to hold aggregated values
+- Variable - $V{} -> (jasper report e calculation er result kothao store kore rakhar jonne) Variables are not data passed to report that they are created in the report to hold aggregated values
   They are predefined variables in the jasper report
 - Internationalization - $R{} -> This holds the key of the resource bundle to support internationalization. Based on the key and locale
   provided it gets corresponding value from resource
@@ -129,11 +129,19 @@ For Delete method
 
     ```
     @TestContainers
-    
+     
     ```
   # How to install docker Docker
 - install wsl 2(windows subsystem linux) backend
 - Docker Desktop Installation guideline - `https://docs.docker.com/desktop/install/windows-install/`
 - check docker version --- docker -v 
-- pull dockcer image from docker hub --- docker pull hello-world (hello-world name er image docker hub theke pull korar niyom)
+- pull docker image from docker hub --- docker pull hello-world (hello-world name er image docker hub theke pull korar niyom)
 - docker images (now docker desktop e koto gulo image ashe sheita dekhabe)
+- docker pull openjdk:18 (ekhane openjdk er 18 version download korar niyom)
+- docker search MYSQL (eitar maddhome cmd te image search kora jai)
+- docker images (joto gulo image locally ashe oigula show korbe)
+- docker run python (python image run korar way)
+- docker ps (recent container dekhar jonne)
+- docker ps -a (shob container dekhar jonne)
+- docker run -env MYSQL_ROOT_PASSWORD=root( docker environment e mysql password daoar jonne)
+- docker run --name pythonContainer -d python (ekhane d mane detach and pythonContainer conatiner er name)
