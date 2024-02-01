@@ -180,6 +180,15 @@ For Delete method
 - docker volume ( docker container eta use korbe for storing the data)
 - docker logout ( docker hub theke log out korar niyom)
 # How to craete docker file in locally
-
+Docker file name should like Dockerfile
+## template of a docker file
+```
+FROM ubuntu
+MAINTAINER shariar
+RUN apt update
+CMD [ "echo", "This is my first image"]
+```
+- docker build -t myubuntuimage . (ekhane . mane hoile current directory j docker file thakbe oita run hobe and image er name hobe myubuntuimage)
+- 
 
   
