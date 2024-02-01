@@ -162,4 +162,24 @@ For Delete method
 - docker run --name httpdServer -d -p 8081:80 httpd (apache server 8081 port e run korlam)
 - docker ps (eitar maddhome ki ki container ekhon running ashe sheita amra check korte parbo)
 ## docker single containter stop korar niyom
-- docker stop pythonContainer1
+- docker stop container_name/container_id
+## docker theke jekono container remove korar niyom
+- docker rm container_id
+## ek shathe onekgulo container stop korar niyom
+- docker rm container_id container_id container_id
+## images gulo remove korar upai
+- docker rmi openjdk:18 (rmi= remove image)
+## docker container restart korar niyom
+- docker restart pythonContainer1
+# Docker hub e login korar niyom
+- docker login (docker hub e login korar jonne for publishing the local image)
+- docker commit ( edited image k commit korar jonne)
+- docker push ( uploaded the local image to docker hub)
+- docker copy ( local file theke copy korar jonne use hoi)
+- docker logs container_name ( er maddhome amra kono container er log check korte parbo)
+- docker volume ( docker container eta use korbe for storing the data)
+- docker logout ( docker hub theke log out korar niyom)
+# How to craete docker file in locally
+
+
+  
