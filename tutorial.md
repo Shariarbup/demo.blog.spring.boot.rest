@@ -131,15 +131,17 @@ For Delete method
     @TestContainers
      
     ```
-  # How to install docker Docker
+# How to install docker Docker
 - install wsl 2(windows subsystem linux) backend
 - Docker Desktop Installation guideline - `https://docs.docker.com/desktop/install/windows-install/`
 - check docker version --- docker -v 
 - pull docker image from docker hub --- docker pull hello-world (hello-world name er image docker hub theke pull korar niyom)
+## OpenJDK 18 run docker
 - docker images (now docker desktop e koto gulo image ashe sheita dekhabe)
 - docker pull openjdk:18 (ekhane openjdk er 18 version download korar niyom)
 - docker search MYSQL (eitar maddhome cmd te image search kora jai)
 - docker images (joto gulo image locally ashe oigula show korbe)
+## Python run from docker
 - docker run python (python image run korar way)
 - docker ps (recent container dekhar jonne)
 - docker ps -a (shob container dekhar jonne)
@@ -147,8 +149,15 @@ For Delete method
 - docker run --name pythonContainer -d python (ekhane d mane detach and pythonContainer conatiner er name)
 - docker run --name pythonContainer -it -d python(it mane hoilo interactive)
 - docker exec -it container_id python3 (ekta container er moddhe python3 exec korbe)
+## MYSQL run from docker
 - MySQL run korar miyom- docker run mysqlDb -e MYSQL_ROOT_PASSWORD=root -d mysql
 - docker inspect mysqlDb(mysqlDb container er full structure dekhabe)
 - docker exec -it mysqlDb bash(eita mysqlDb container run hbe)
 - then mysql -p er maddhome password dite hobe
-- 
+- exit (ei command dile cmd off kora jai)
+## Nginx server run from docker
+- docker run --name nginxServer -d -p 8080:80 nginx (ekhane d= detach and p= port ebong command tar mane jodi container 8080 port er then nginx cholbe 80 port)
+## apache er docker name httpd
+- docker pull httpd
+- docker run --name httpdServer -d -p 8081:80 httpd (apache server 8081 port e run korlam)
+- docker ps (eitar maddhome ki ki container ekhon running ashe sheita amra check korte parbo) 
