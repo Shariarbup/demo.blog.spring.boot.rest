@@ -160,4 +160,6 @@ For Delete method
 ## apache er docker name httpd
 - docker pull httpd
 - docker run --name httpdServer -d -p 8081:80 httpd (apache server 8081 port e run korlam)
-- docker ps (eitar maddhome ki ki container ekhon running ashe sheita amra check korte parbo) 
+- docker ps (eitar maddhome ki ki container ekhon running ashe sheita amra check korte parbo)
+## docker single containter stop korar niyom
+- docker stop pythonContainer1
